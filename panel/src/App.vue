@@ -130,7 +130,6 @@ export default {
     update(id) {
       HTTP.get('/view/'+id)
 				.then(res => {
-          console.log(res.data);
 					this.$modal.open({
 						parent: this,
 						component: Update,
