@@ -87,6 +87,7 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 'GET /' => 'site/index',
+                'GET /list' => 'site/list',
                 'POST /order' => 'site/order',
             ],
         ],

@@ -7,6 +7,7 @@ use yii\rest\Controller;
 use app\models\Order;
 use app\models\Printer;
 use app\models\Cartridge;
+use app\models\Cart;
 
 class SiteController extends Controller
 {
@@ -61,10 +62,43 @@ class SiteController extends Controller
         if($model->save()) {
             $id = Yii::$app->db->getLastInsertID();
             //get order parts
+            $parts = [];
+            if($model->sum >= $printer['price']) {
+                $priceWitoutPrinter = $model->sum - $printer['price'];
+                if($priceWitoutPrinter == 0) {
+                    //have printer(s) only
+                    $parts[] = $printer['article'];
+                } else {
+                    //printer and cartrige
+                    $parts[] = $printer['article'];
+                    //find cartrigies
+                    $cartrigies = Cartridge::find()->where(['printer'=>$printer['id']])->orderBy('price')->asArray()->all();
+                    $minCn = 0;
+                    $maxCn = count($cartrigies)-1;
+                    for($i = 0;$i <= 5;$i++) {
+                        if($priceWitoutPrinter > 0) {
+                            if ($priceWitoutPrinter - $cartrigies[$maxCn]['price'] >= 0) {
+                                $priceWitoutPrinter =  $priceWitoutPrinter - $cartrigies[$maxCn]['price'];
+                                $parts[] =  $cartrigies[$maxCn]['article'];
+                            } else {
+                                $maxCn --;
+                            }
+                        }
+                    }
+                }
+                $cart = new Cart();
+                $cart->order = $id;
+                $cart->parts = json_encode($parts);
+                $cart->save();
+
+            } else {
+                //it is cartrige only
+                return ['data' => -1, 'error' => 'it is cartrige only'];
+            }
             
             return ['data' => $id, 'error' => null];
         } else {
-            return ['data' => $model->validate(), 'error' => null];
+            return ['data' => -1, 'error' => 'cant create order'];
         }
 
         
@@ -73,7 +107,9 @@ class SiteController extends Controller
 
     public function actionList()
     {
-        //list orders for manager
+        $model = Order::find()->asArray()->all();
+
+        return ['data'=> $model, 'error'=>null];
     }
 
     public function actionUpdate()
