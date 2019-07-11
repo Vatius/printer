@@ -41,22 +41,43 @@
 				</div>
 			</div>
       <div class="container">
+        <br>
 				<table class="table is-striped is-narrow is-hoverable is-fullwidth">
+          <thead>
+            <tr>
+              <td></td>
+              <td>ID</td>
+              <td>ФИО</td>
+              <td>Телефон</td>
+              <td>Статус</td>
+              <td></td>
+            </tr>
+          </thead>
 					<tbody>
 						<tr v-for="item in list" :key="item.id">
 							<td>
 								<b-icon icon="user" />
 							</td>
 							<td>
+								{{ item.id }}
+							</td>
+              <td>
 								{{ item.fio }}
 							</td>
 							<td>
 								{{ item.tel }}
 							</td>
+              <td>
+                <span class="tag" v-if="item.status == 1">новый заказ</span>
+                <span class="tag is-primary" v-if="item.status == 2">позвонил менеджер</span>
+                <span class="tag is-primary" v-if="item.status == 3">на доставке</span>
+                <span class="tag is-success" v-if="item.status == 4">доставлен</span>
+                <span class="tag is-danger" v-if="item.status == 5">клиент отказался</span>
+							</td>
 							<td class="contact-controls">
 								<div class="field has-addons is-pulled-right">
 									<p class="control">
-										<a class="button" @click="update(item.id)"><b-icon icon="pencil" /></a>
+										<a class="button" @click="update(item.id)"><b-icon icon="edit" /></a>
 									</p>
 								</div>
 							</td>
