@@ -44,11 +44,11 @@ import { HTTP } from './../http-common.js'
 
 export default {
 	name: 'Update',
-	props: ['id','fio','tel'],
+	props: ['id','fio','tel','status'],
 	data () {
 		return {
-			newName: this.name,
-			newTelephone: this.telephone,
+			newName: this.fio,
+			newTelephone: this.tel,
 		}
 	},
 	methods: {

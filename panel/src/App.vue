@@ -130,15 +130,16 @@ export default {
     update(id) {
       HTTP.get('/view/'+id)
 				.then(res => {
+          console.log(res.data);
 					this.$modal.open({
 						parent: this,
 						component: Update,
 						hasModalCard: true,
 						props: {
-							id: res.data.id,
-							fio: res.data.fio,
-							tel: res.data.tel,
-							status: res.data.status,
+							id: res.data.data.id,
+							fio: res.data.data.fio,
+							tel: res.data.data.tel,
+							status: res.data.data.status,
 						},
 						events: {
 							saved: data => {

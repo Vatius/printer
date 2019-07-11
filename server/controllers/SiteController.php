@@ -114,7 +114,7 @@ class SiteController extends Controller
 
     public function actionView($id)
     {
-        $model = Order::find()->where(['id' => $id])->asArray()->all();
+        $model = Order::find()->where(['id' => $id])->asArray()->one();
 
         return ['data'=> $model, 'error'=>null];
     }
