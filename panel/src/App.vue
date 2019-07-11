@@ -96,6 +96,8 @@
 import {HTTP} from './http-common.js'
 import debounce from 'lodash/debounce'
 
+import Update from './components/Update'
+
 export default {
   name: 'app',
   data() {
@@ -125,8 +127,30 @@ export default {
 					throw error
 				})
     }, 500),
-    update() {
-      //some here...
+    update(id) {
+      HTTP.get('/view/'+id)
+				.then(res => {
+					this.$modal.open({
+						parent: this,
+						component: Update,
+						hasModalCard: true,
+						props: {
+							id: res.data.id,
+							fio: res.data.fio,
+							tel: res.data.tel,
+							status: res.data.status,
+						},
+						events: {
+							saved: data => {
+								this.list.forEach((element, index)  => {
+									if (element.id == data.id) {
+										this.list.splice(index, 1, data)
+									}
+								})
+							}
+						}
+					})
+				})
     }
   },
   created() {

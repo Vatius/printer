@@ -112,6 +112,13 @@ class SiteController extends Controller
         return ['data'=> $model, 'error'=>null];
     }
 
+    public function actionView($id)
+    {
+        $model = Order::find()->where(['id' => $id])->asArray()->all();
+
+        return ['data'=> $model, 'error'=>null];
+    }
+
     public function actionUpdate()
     {
         //update order for manager
