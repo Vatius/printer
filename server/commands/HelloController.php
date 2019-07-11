@@ -31,4 +31,13 @@ class HelloController extends Controller
 
         return ExitCode::OK;
     }
+
+    public function actionDemodata()
+    {
+        echo "creating demo data...\n";
+
+        //some here...
+
+        return ExitCode::OK;
+    }
 }
