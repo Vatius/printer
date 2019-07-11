@@ -43,7 +43,7 @@ class SiteController extends Controller
             $res = str_replace('-','',$res);
             if($res[0] == '8')
                 $res[0] = '7';
-            $model->phone = $res;
+            $model->tel = $res;
         } else {
             return ['data'=>null, 'error'=>'invalid phone number'];
         }
@@ -115,6 +115,11 @@ class SiteController extends Controller
     public function actionUpdate()
     {
         //update order for manager
+    }
+
+    public function actionSearch()
+    {
+        //find client..
     }
 
     public function actionStat()

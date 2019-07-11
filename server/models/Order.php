@@ -9,7 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property string $fio
- * @property int $phone
+ * @property string $tel
  * @property string $article
  * @property int $sum
  * @property int $status
@@ -31,9 +31,9 @@ class Order extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['fio', 'phone', 'article', 'sum', 'status'], 'required'],
-            [['fio', 'article'], 'string'],
-            [['phone', 'sum', 'status'], 'integer'],
+            [['fio', 'tel', 'article', 'sum', 'status'], 'required'],
+            [['fio', 'article', 'tel'], 'string'],
+            [['sum', 'status'], 'integer'],
             [['created_at'], 'safe'],
         ];
     }
@@ -46,7 +46,7 @@ class Order extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'fio' => 'Fio',
-            'phone' => 'Phone',
+            'tel' => 'Phone',
             'article' => 'Article',
             'sum' => 'Sum',
             'status' => 'Status',

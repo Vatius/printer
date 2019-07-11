@@ -15,7 +15,7 @@ class m190711_135804_create_order_table extends Migration
         $this->createTable('{{%order}}', [
             'id' => $this->primaryKey(),
             'fio' => $this->text()->notNull(),
-            'phone' => $this->integer()->notNull(),
+            'tel' => $this->text()->notNull(),
             'article' => $this->text()->notNull(),
             'sum' => $this->integer()->notNull(),
             'status' => $this->integer()->notNull(),

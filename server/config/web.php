@@ -88,6 +88,7 @@ $config = [
             'rules' => [
                 'GET /' => 'site/index',
                 'GET /list' => 'site/list',
+                'POST /search' => 'site/search',
                 'POST /order' => 'site/order',
             ],
         ],
