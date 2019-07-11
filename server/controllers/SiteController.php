@@ -119,9 +119,19 @@ class SiteController extends Controller
         return ['data'=> $model, 'error'=>null];
     }
 
-    public function actionUpdate()
+    public function actionUpdate($id)
     {
-        //update order for manager
+        $reqData = Yii::$app->request->post();
+
+        $model = Order::find()->where(['id' => $id])->one();
+
+        $model->fio = $reqData['fio'];
+        $model->tel = $reqData['tel'];
+        $model->status = $reqData['status'];
+
+        $model->save();
+        
+        return ['data'=> $model, 'error'=>null];
     }
 
     public function actionSearch()

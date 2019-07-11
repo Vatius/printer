@@ -89,6 +89,7 @@ $config = [
                 'GET /' => 'site/index',
                 'GET /list' => 'site/list',
                 'GET /view/<id>' => 'site/view',
+                'POST /update/<id>' => 'site/update',
                 'POST /search' => 'site/search',
                 'POST /order' => 'site/order',
             ],

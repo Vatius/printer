@@ -21,7 +21,7 @@
 						</p>
 						<p class="control is-expanded">
 							<b-input
-								type="number"
+								type="text"
 								v-model="newTelephone"
 								placeholder="79991112233"
 								required>
@@ -29,6 +29,19 @@
 						</p>
 					</div>
 				</div>
+			</b-field>
+
+			<b-field
+				label="Статус"
+				type="is-info"
+			>
+				<b-select placeholder="Select a character" v-model="newStatus">
+					<option value="1">новый</option>
+					<option value="2">позвонил менеджер</option>
+					<option value="3">на доставке</option>
+					<option value="4">доставлен</option>
+					<option value="5">клиент отказался</option>
+				</b-select>
 			</b-field>
 
 		</section>
@@ -49,17 +62,18 @@ export default {
 		return {
 			newName: this.fio,
 			newTelephone: this.tel,
+			newStatus: this.status
 		}
 	},
 	methods: {
 		save () {
-			if (!this.name || !this.telephone) {
+			if (!this.newName || !this.newTelephone) {
 				return
 			}
 			HTTP.post('/update/'+this.id, {
-				name: this.newName,
-				email: this.newEmail,
-				telephone: Number(this.newTelephone)
+				fio: this.newName,
+				status: this.newStatus,
+				tel: Number(this.newTelephone)
 			}).then(res => {
 				this.$emit('saved', res.data)
 				this.$toast.open('Информация обновлена')
