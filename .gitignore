@@ -1,0 +1,12 @@
+.DS_Store
+panel/node_modules
+panel/dist
+
+# local env files
+panel/.env.local
+panel/.env.*.local
+
+# Log files
+panel/npm-debug.log*
+panel/yarn-debug.log*
+panel/yarn-error.log*
